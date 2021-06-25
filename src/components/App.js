@@ -220,8 +220,8 @@ class App extends Component {
                         style={blur === true ? { filter: 'blur(10px)' } : { filter: 'blur(0px)' }}
                     >
                         <div
-                            //className='back' style={{ backgroundImage: `url(${process.env.PUBLIC_URL +'/pagesImg/' + linkImg})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
-                            className='back' style={{ backgroundImage: `url('https://dmitrykalko.github.io/sula-site/pagesImg/2.jpg')`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
+                            className='back' style={{ backgroundImage: `url(${process.env.PUBLIC_URL +'/pagesImg/' + '2.jpg'})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
+                            //className='back' style={{ backgroundImage: `url('https://dmitrykalko.github.io/sula-site/pagesImg/2.jpg')`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
                         >
                         </div>
                     </div>
