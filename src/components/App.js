@@ -191,7 +191,7 @@ class App extends Component {
     };
 
     render() {
-        console.log(this.state);
+        //console.log(this.state);
         const {
             linkImg,
             linkVideo,
@@ -220,7 +220,7 @@ class App extends Component {
                         style={blur === true ? { filter: 'blur(10px)' } : { filter: 'blur(0px)' }}
                     >
                         <div
-                            className='back' style={{ backgroundImage: `url(${process.env.PUBLIC_URL +'/pagesImg/' + '2.jpg'})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
+                            className='back' style={{ backgroundImage: `url(${process.env.PUBLIC_URL +'/sula-site/pagesImg/' + '2.jpg'})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
                             //className='back' style={{ backgroundImage: `url('https://dmitrykalko.github.io/sula-site/pagesImg/2.jpg')`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
                         >
                         </div>
@@ -243,7 +243,7 @@ class App extends Component {
                                 style={showMenu === true ? { display: 'none' } : { display: 'flex' }}
                             >
                                 <img
-                                    className='burger-menu' src={process.env.PUBLIC_URL + '/images/burger.svg'} alt='burger'
+                                    className='burger-menu' src={process.env.PUBLIC_URL + '/sula-site/images/burger.svg'} alt='burger'
                                     onClick={this.showMenu}
                                 />
                                 <div className='title-texts'>
