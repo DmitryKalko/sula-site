@@ -220,7 +220,7 @@ class App extends Component {
                         style={blur === true ? { filter: 'blur(10px)' } : { filter: 'blur(0px)' }}
                     >
                         <div
-                            className='back' style={{ backgroundImage: `url(${"/pagesImg/" + linkImg})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
+                            className='back' style={{ backgroundImage: `url(${process.env.PUBLIC_URL +'/pagesImg/' + linkImg})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
                         >
                         </div>
                     </div>
@@ -231,7 +231,7 @@ class App extends Component {
                         onTouchMove={this.touchMove}
                     >
                         <img className='top-scroll'
-                            src={process.env.PUBLIC_URL + 'images/arrow.svg'}
+                            src={process.env.PUBLIC_URL + '/images/arrow.svg'}
                             alt='top-scroll'
                             onClick={this.goToUp}
                         />
@@ -242,7 +242,7 @@ class App extends Component {
                                 style={showMenu === true ? { display: 'none' } : { display: 'flex' }}
                             >
                                 <img
-                                    className='burger-menu' src={process.env.PUBLIC_URL + 'images/burger.svg'} alt='burger'
+                                    className='burger-menu' src={process.env.PUBLIC_URL + '/images/burger.svg'} alt='burger'
                                     onClick={this.showMenu}
                                 />
                                 <div className='title-texts'>
@@ -253,22 +253,22 @@ class App extends Component {
                                     <p>парк истории</p>
                                 </div>
                             </div>
-                            <img className='herb' src={process.env.PUBLIC_URL + 'images/herb.svg'} alt='herb' />
+                            <img className='herb' src={process.env.PUBLIC_URL + '/images/herb.svg'} alt='herb' />
                         </div>
 
                         <div className='middle-lavel'>
                             <img className='left-scroll'
-                                src={process.env.PUBLIC_URL + 'images/arrow.svg'}
+                                src={process.env.PUBLIC_URL + '/images/arrow.svg'}
                                 alt='left-scroll'
                                 onClick={this.goToLeft}
                             />
                             <img className='play-video'
-                                src={process.env.PUBLIC_URL + 'images/play.svg'}
+                                src={process.env.PUBLIC_URL + '/images/play.svg'}
                                 alt='play-video'
                                 onClick={this.showVideo}
                             />
                             <img className='right-scroll'
-                                src={process.env.PUBLIC_URL + 'images/arrow.svg'}
+                                src={process.env.PUBLIC_URL + '/images/arrow.svg'}
                                 alt='right-scroll'
                                 onClick={this.goToRight}
                             />
@@ -287,15 +287,15 @@ class App extends Component {
 
                         <div className='social'>
                             {/* повставлять ссылки на соцсети */}
-                            <img src={process.env.PUBLIC_URL + 'images/f.svg'} alt='facebook' />
-                            <img src={process.env.PUBLIC_URL + 'images/g.svg'} alt='google' />
-                            <img src={process.env.PUBLIC_URL + 'images/t.svg'} alt='twitter' />
-                            <img src={process.env.PUBLIC_URL + 'images/i.svg'} alt='instagram' />
-                            <img src={process.env.PUBLIC_URL + 'images/boll.svg'} alt='boll' />
+                            <img src={process.env.PUBLIC_URL + '/images/f.svg'} alt='facebook' />
+                            <img src={process.env.PUBLIC_URL + '/images/g.svg'} alt='google' />
+                            <img src={process.env.PUBLIC_URL + '/images/t.svg'} alt='twitter' />
+                            <img src={process.env.PUBLIC_URL + '/images/i.svg'} alt='instagram' />
+                            <img src={process.env.PUBLIC_URL + '/images/boll.svg'} alt='boll' />
                         </div>
 
                         <img className='down-scroll'
-                            src={process.env.PUBLIC_URL + 'images/arrow.svg'}
+                            src={process.env.PUBLIC_URL + '/images/arrow.svg'}
                             alt='down-scroll'
                             onClick={this.goToDown}
                         />
