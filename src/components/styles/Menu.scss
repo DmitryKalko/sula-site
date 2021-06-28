@@ -12,12 +12,12 @@ $white-color: rgb(235, 228, 214);
 	position: absolute;
 	top: 0; left: 0;
 	z-index: 12;
-	height: 100vh;
+	height: 100%;
 	width: 320px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: space-around;
+	//justify-content: space-around;
 	background-color: rgba(235, 228, 214, 0.8);
 	transform: translateX(-320px); //0px для выезда
 	transition: transform 0.5s ease-in-out;
@@ -67,7 +67,7 @@ $white-color: rgb(235, 228, 214);
     display: flex;
     flex-direction: column;
 	align-self: center;
-	margin-top: 25px;
+	margin-top: 60px;
 	p{
 		color: black;
 		align-self: flex-end;
@@ -88,6 +88,10 @@ $white-color: rgb(235, 228, 214);
     }
 }
 
-// @media (max-width: 770px) {
+@media (max-width: 500px) {
+	.title{
+		margin-top: 20px;
+	}
+
     
-// }
+}
