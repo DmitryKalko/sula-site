@@ -1,5 +1,19 @@
 export const navigationDb = [
     {
+        id: 1,
+        idMaster: null,
+        idUp: null,
+        idDown: 2,
+        idLeft: 2,
+        idRight: 2,
+        idReserve1: null,
+        idReserve2: null,
+        idReserve3: null,
+        p1: null,
+        p2: null,
+        del: null,
+    },
+    {
         id: 2,
         idMaster: null,
         idUp: null,

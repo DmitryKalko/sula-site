@@ -10,7 +10,7 @@ import Menu from './Menu';
 
 class App extends Component {
     state = {
-        currentSlideId: 2,
+        currentSlideId: 1,
         idUp: null,
         idDown: null,
         idLeft: null,
@@ -18,6 +18,7 @@ class App extends Component {
         navigationDb: navigationDb,
         textsDb: textsDb,
         currentNavigationObject: null,
+        //currentContentObject: null,
         name1: '',
         name2: '',
         name3: '',
@@ -63,6 +64,7 @@ class App extends Component {
         let needContentObject = textsDb.filter(item => item.id === currentSlideId);
         // console.log(needContentObject[0]);
         this.setState({
+            //currentContentObject: needContentObject[0],
             name1: needContentObject[0].name1,
             name2: needContentObject[0].name2,
             name3: needContentObject[0].name3,
@@ -129,6 +131,13 @@ class App extends Component {
         if (currentNavigationObject.idLeft !== null) {
             this.setState({ currentSlideId: currentNavigationObject.idLeft });
         }
+        setTimeout(() => {
+            this.setNavigation();
+            this.setContent();
+        }, 100);
+    }
+    goToStart = () => {
+        this.setState({ currentSlideId: 1 });
         setTimeout(() => {
             this.setNavigation();
             this.setContent();
@@ -268,7 +277,11 @@ class App extends Component {
                                     <p>парк истории</p>
                                 </div>
                             </div>
-                            <img className='herb' src={process.env.PUBLIC_URL + '/images/herb.svg'} alt='herb' />
+                            <img className='herb'
+                                src={process.env.PUBLIC_URL + '/images/herb.svg'}
+                                alt='herb'
+                                onClick={this.goToStart}
+                            />
                         </div>
                         <div className='navigation-wrapper'>
                             <div className='navigation-block'
