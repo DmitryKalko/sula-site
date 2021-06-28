@@ -240,7 +240,7 @@ $height: 100%;
     .more{
         font-size: 16px;
     }
-    .top-scroll, .middle-lavel img, .down-scroll{
+    .top-scroll, .navigation-block img, .down-scroll{
         width: 80px;
     }
     .burger-menu{
@@ -254,17 +254,19 @@ $height: 100%;
     .top-scroll, .left-scroll, .right-scroll, .down-scroll{
         display: none;
     }
-    .middle-lavel{
+    .navigation-block{
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 0px;
     }
     .text, .more{
         display: none;
     }
-    .bottom-lavel{
+    .content-block{
         width: 100%;
+    }
+    .name1-name2{
+        flex-direction: column;
     }
     .slogan{
         font-size: 25px;
@@ -289,7 +291,7 @@ $height: 100%;
         align-self: flex-end;
         width: 60px;
     }
-    .bottom-lavel{
+    .content-block{
         padding: 0 0 50px 20px;
     }
 }

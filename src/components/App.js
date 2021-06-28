@@ -153,6 +153,7 @@ class App extends Component {
 
     showVideo = () => {
         const { showVideo, blur, showMenu } = this.state;
+        
         if (showMenu !== true) {
             this.setState({ showVideo: !showVideo, blur: !blur });
         }
@@ -234,6 +235,7 @@ class App extends Component {
             idDown,
             idLeft,
             idRight,
+            screenWidth,
         } = this.state;
 
         return (
@@ -243,7 +245,12 @@ class App extends Component {
                         style={blur === true ? { filter: 'blur(10px)' } : { filter: 'blur(0px)' }}
                     >
                         <div
-                            className='back' style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/pagesImg/' + linkImg})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
+                            className='back' 
+                            style={ screenWidth > 765  ? 
+                                { backgroundImage: `url(${process.env.PUBLIC_URL + '/pagesImg/' + linkImg})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }
+                                :
+                                { backgroundImage: `url(${process.env.PUBLIC_URL + '/pagesImg/' + linkImg})`}
+                            }
                         >
                         </div>
                     </div>
@@ -285,10 +292,10 @@ class App extends Component {
                         </div>
                         <div className='navigation-wrapper'>
                             <div className='navigation-block'
-                                style={idLeft === null ? { justifyContent: 'center' } : { justifyContent: 'space-between' }}
+                                style={idLeft === null || screenWidth < 765  ? { justifyContent: 'center' } : { justifyContent: 'space-between' }}
                             >
                                 <img className='left-scroll'
-                                    style={idLeft === null ? { display: 'none' } : { display: 'flex' }}
+                                    style={idLeft === null || screenWidth < 765  ? { display: 'none' } : { display: 'flex' }}
                                     src={process.env.PUBLIC_URL + '/images/arrow.svg'}
                                     alt='left-scroll'
                                     onClick={this.goToLeft}
@@ -299,7 +306,7 @@ class App extends Component {
                                     onClick={this.showVideo}
                                 />
                                 <img className='right-scroll'
-                                    style={idRight === null ? { display: 'none' } : { display: 'flex' }}
+                                    style={idRight === null || screenWidth < 765  ? { display: 'none' } : { display: 'flex' }}
                                     src={process.env.PUBLIC_URL + '/images/arrow.svg'}
                                     alt='right-scroll'
                                     onClick={this.goToRight}
