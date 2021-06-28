@@ -11,6 +11,10 @@ import Menu from './Menu';
 class App extends Component {
     state = {
         currentSlideId: 2,
+        idUp: null,
+        idDown: null,
+        idLeft: null,
+        idRight: null,
         navigationDb: navigationDb,
         textsDb: textsDb,
         currentNavigationObject: null,
@@ -75,8 +79,14 @@ class App extends Component {
     setNavigation = () => {
         const { navigationDb, currentSlideId } = this.state;
         let needNavigationObject = navigationDb.filter(item => item.id === currentSlideId);
-        // console.log(needNavigationObject[0]);
-        this.setState({ currentNavigationObject: needNavigationObject[0] });
+        //console.log(needNavigationObject[0]);
+        this.setState({
+            currentNavigationObject: needNavigationObject[0],
+            idUp: needNavigationObject[0].idUp,
+            idDown: needNavigationObject[0].idDown,
+            idLeft: needNavigationObject[0].idLeft,
+            idRight: needNavigationObject[0].idRight,
+        });
     }
     goToUp = () => {
         const { currentNavigationObject, showMenu } = this.state;
@@ -191,7 +201,7 @@ class App extends Component {
     };
 
     render() {
-        
+
         const {
             linkImg,
             linkVideo,
@@ -211,6 +221,10 @@ class App extends Component {
             showSecondMenu,
             blur,
             blurAll,
+            idUp,
+            idDown,
+            idLeft,
+            idRight,
         } = this.state;
 
         return (
@@ -220,7 +234,7 @@ class App extends Component {
                         style={blur === true ? { filter: 'blur(10px)' } : { filter: 'blur(0px)' }}
                     >
                         <div
-                            className='back' style={{ backgroundImage: `url(${process.env.PUBLIC_URL +'/pagesImg/' + linkImg})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
+                            className='back' style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/pagesImg/' + linkImg})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }}
                         >
                         </div>
                     </div>
@@ -231,6 +245,7 @@ class App extends Component {
                         onTouchMove={this.touchMove}
                     >
                         <img className='top-scroll'
+                            style={idUp === null ? { display: 'none' } : { position: 'absolute' }}
                             src={process.env.PUBLIC_URL + '/images/arrow.svg'}
                             alt='top-scroll'
                             onClick={this.goToUp}
@@ -255,34 +270,40 @@ class App extends Component {
                             </div>
                             <img className='herb' src={process.env.PUBLIC_URL + '/images/herb.svg'} alt='herb' />
                         </div>
-
-                        <div className='middle-lavel'>
-                            <img className='left-scroll'
-                                src={process.env.PUBLIC_URL + '/images/arrow.svg'}
-                                alt='left-scroll'
-                                onClick={this.goToLeft}
-                            />
-                            <img className='play-video'
-                                src={process.env.PUBLIC_URL + '/images/play.svg'}
-                                alt='play-video'
-                                onClick={this.showVideo}
-                            />
-                            <img className='right-scroll'
-                                src={process.env.PUBLIC_URL + '/images/arrow.svg'}
-                                alt='right-scroll'
-                                onClick={this.goToRight}
-                            />
-                        </div>
-
-                        <div className='bottom-lavel'>
-                            <div className='name1-name2'>
-                                <p className='name1'>{name1}</p>
-                                <p className='name2'>{name2}</p>
+                        <div className='navigation-wrapper'>
+                            <div className='navigation-block'
+                                style={idLeft === null ? { justifyContent: 'center' } : { justifyContent: 'space-between' }}
+                            >
+                                <img className='left-scroll'
+                                    style={idLeft === null ? { display: 'none' } : { display: 'flex' }}
+                                    src={process.env.PUBLIC_URL + '/images/arrow.svg'}
+                                    alt='left-scroll'
+                                    onClick={this.goToLeft}
+                                />
+                                <img className='play-video'
+                                    src={process.env.PUBLIC_URL + '/images/play.svg'}
+                                    alt='play-video'
+                                    onClick={this.showVideo}
+                                />
+                                <img className='right-scroll'
+                                    style={idRight === null ? { display: 'none' } : { display: 'flex' }}
+                                    src={process.env.PUBLIC_URL + '/images/arrow.svg'}
+                                    alt='right-scroll'
+                                    onClick={this.goToRight}
+                                />
                             </div>
-                            <p className='name3'>{name3}</p>
-                            <p className='slogan'>{slogan}</p>
-                            <p className='text'>{text}</p>
-                            <p className='more' onClick={this.showInfoSrceen}>подробнее</p>
+                        </div>
+                        <div className='content-wrapper'>
+                            <div className='content-block'>
+                                <div className='name1-name2'>
+                                    <p className='name1'>{name1}</p>
+                                    <p className='name2'>{name2}</p>
+                                </div>
+                                <p className='name3'>{name3}</p>
+                                <p className='slogan'>{slogan}</p>
+                                <p className='text'>{text}</p>
+                                <p className='more' onClick={this.showInfoSrceen}>подробнее</p>
+                            </div>
                         </div>
 
                         <div className='social'>
@@ -295,6 +316,7 @@ class App extends Component {
                         </div>
 
                         <img className='down-scroll'
+                            style={idDown === null ? { display: 'none' } : { position: 'absolute' }}
                             src={process.env.PUBLIC_URL + '/images/arrow.svg'}
                             alt='down-scroll'
                             onClick={this.goToDown}

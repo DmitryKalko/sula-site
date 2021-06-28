@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+
 
 $white-color: #EBE4D6;
+$height: 100%;
 
 *{
     margin: 0;
@@ -51,11 +54,15 @@ $white-color: #EBE4D6;
     cursor: pointer;
     transform: rotate(180deg);
 }
-.middle-lavel{
+.navigation-wrapper{
+    width: 100%;
+    position: absolute;
+    top: $height * 0.3; left: 0;
+}
+.navigation-block{
     display: flex;
-    justify-content: space-between;
+    //justify-content: center;
     align-items: center;
-    margin-top: 100px;
     img{
         cursor: pointer;
     }
@@ -103,7 +110,12 @@ $white-color: #EBE4D6;
         color: $white-color;
     }
 }
-.bottom-lavel{
+.content-wrapper{
+    width: 100%;
+    position: absolute;
+    top: $height * 0.5; left: 0;
+}
+.content-block{
     padding: 0 0 50px 50px;
     width: 70%;
     p{
@@ -126,7 +138,7 @@ $white-color: #EBE4D6;
 .slogan{
     font-family: 'Playfair Display', serif;
     font-size: 55px;
-    font-weight: 700;
+    //font-weight: 700;
     opacity: 0.75;
 }
 .text{
@@ -137,7 +149,7 @@ $white-color: #EBE4D6;
     text-align: right;
     font-size: 24px;
     font-weight: 900;
-    border-bottom: 1px solid $white-color;
+    border-top: 1px solid $white-color;
     cursor: pointer;
 }
 .social{
