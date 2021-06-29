@@ -13,17 +13,24 @@ $height: 100%;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
+    overflow-y: hidden;
+}
+.all-wrapper{
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  overflow-y: hidden;
 }
 .wrapper{
-    height: 100vh;
+    height: 100%;
     position: relative;
-    overflow: hidden;
+    overflow-y: hidden;
 }
 .back{ 
     position: absolute;
     height: 110%;
     width: 110%;
     background-size: cover;
+    overflow-y: hidden;
     background-position: center;
     transition: all 0.8s ease;
 }
@@ -253,6 +260,9 @@ $height: 100%;
 @media (max-width: 765px) {
     .top-scroll, .left-scroll, .right-scroll, .down-scroll{
         display: none;
+    }
+    .back{
+        height: 100%;
     }
     .navigation-block{
         display: flex;

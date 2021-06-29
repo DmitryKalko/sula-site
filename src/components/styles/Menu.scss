@@ -24,7 +24,7 @@ $white-color: rgb(235, 228, 214);
 }
 .line{
 	border-left: 1px solid white;
-    height: 70vh;
+    height: 70%;
     position: absolute;
     left: 0%;
     top: 20%;
@@ -33,7 +33,7 @@ $white-color: rgb(235, 228, 214);
 	position: absolute;
 	top: 0; left: 0;
 	z-index: 11;
-	height: 100vh;
+	height: 100%;
 	width: 250px;
 	display: flex;
 	flex-direction: column;
