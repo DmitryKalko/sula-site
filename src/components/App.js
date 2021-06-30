@@ -9,42 +9,47 @@ import Video from './Video';
 import Menu from './Menu';
 
 class App extends Component {
-    state = {
-        currentSlideId: 1,
-        idUp: null,
-        idDown: null,
-        idLeft: null,
-        idRight: null,
-        navigationDb: navigationDb,
-        textsDb: textsDb,
-        currentNavigationObject: null,
-        currentContentObject: null,
-        name1: '',
-        name2: '',
-        name3: '',
-        fullName: '',
-        slogan: '',
-        text: '',
-        comment1: '',
-        comment2: '',
-        comment3: '',
-        linkImg: '',
-        linkVideo: '',
-        showMenu: false,
-        showSecondMenu: false,
-        showInfoScreen: false,
-        showVideo: false,
-        blur: false,
-        blurAll: false,
-        shiftX: null,
-        shiftY: null,
-        coordX: null,
-        coordY: null,
-        screenWidth: null,
-        screenHeight: null,
-    };
+    constructor() {
+        super();
+        this.state = {
+            currentSlideId: 1,
+            idUp: null,
+            idDown: null,
+            idLeft: null,
+            idRight: null,
+            navigationDb: navigationDb,
+            textsDb: textsDb,
+            currentNavigationObject: null,
+            currentContentObject: null,
+            name1: '',
+            name2: '',
+            name3: '',
+            fullName: '',
+            slogan: '',
+            text: '',
+            comment1: '',
+            comment2: '',
+            comment3: '',
+            linkImg: '',
+            linkVideo: '',
+            showMenu: false,
+            showSecondMenu: false,
+            showInfoScreen: false,
+            showVideo: false,
+            blur: false,
+            blurAll: false,
+            shiftX: null,
+            shiftY: null,
+            coordX: null,
+            coordY: null,
+            screenWidth: null,
+            screenHeight: null,
+        };
+        this._isMounted = false;
+    }
 
     componentDidMount() {
+        this._isMounted = true;
         let currentUrl = window.location.href;
         let needId = currentUrl.slice(currentUrl.indexOf('=') + 1);
         //console.log(needId);
@@ -57,9 +62,10 @@ class App extends Component {
             screenWidth: window.innerWidth,
             screenHeight: window.innerHeight
         });
-        setTimeout(() => this.setOpionals(), 50)
-        //this.setNavigation();
-
+        setTimeout(() => this.setOpionals(), 50);
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     setOpionals = () => {
