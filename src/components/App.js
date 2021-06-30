@@ -45,7 +45,24 @@ class App extends Component {
     };
 
     componentDidMount() {
-        this.setState({ screenWidth: window.innerWidth, screenHeight: window.innerHeight });
+        let currentUrl = window.location.href;
+        let needId = currentUrl.slice(currentUrl.indexOf('=') + 1);
+        //console.log(needId);
+        if (needId.length > 10) {
+            this.setState({ currentSlideId: 1 });
+        } else {
+            this.setState({ currentSlideId: needId });
+        }
+        this.setState({
+            screenWidth: window.innerWidth,
+            screenHeight: window.innerHeight
+        });
+        setTimeout(() => this.setOpionals(), 50)
+        //this.setNavigation();
+
+    }
+
+    setOpionals = () => {
         this.setContent();
         this.setNavigation();
         this.parallax();
@@ -61,8 +78,8 @@ class App extends Component {
 
     setContent = () => {
         const { textsDb, currentSlideId } = this.state;
-        let needContentObject = textsDb.filter(item => item.id === currentSlideId);
-        // console.log(needContentObject[0]);
+        let needContentObject = textsDb.filter(item => item.id === Number(currentSlideId));
+        //console.log(needContentObject[0]);
         this.setState({
             currentContentObject: needContentObject[0],
             name1: needContentObject[0].name1,
@@ -75,12 +92,12 @@ class App extends Component {
             comment2: needContentObject[0].comment2,
             comment3: needContentObject[0].comment3,
             linkImg: needContentObject[0].linkImg,
-           // linkVideo: needContentObject[0].linkVideo,
+            // linkVideo: needContentObject[0].linkVideo,
         });
     }
     setNavigation = () => {
         const { navigationDb, currentSlideId } = this.state;
-        let needNavigationObject = navigationDb.filter(item => item.id === currentSlideId);
+        let needNavigationObject = navigationDb.filter(item => item.id === Number(currentSlideId));
         //console.log(needNavigationObject[0]);
         this.setState({
             currentNavigationObject: needNavigationObject[0],
@@ -137,11 +154,14 @@ class App extends Component {
         }, 100);
     }
     goToStart = () => {
-        this.setState({ currentSlideId: 1 });
-        setTimeout(() => {
-            this.setNavigation();
-            this.setContent();
-        }, 100);
+        const { showMenu } = this.state;
+        if (showMenu !== true) {
+            this.setState({ currentSlideId: 1 });
+            setTimeout(() => {
+                this.setNavigation();
+                this.setContent();
+            }, 100);
+        }
     }
 
     showInfoSrceen = () => {
@@ -152,11 +172,13 @@ class App extends Component {
     }
 
     showVideo = () => {
-        const { currentContentObject } = this.state;
-        this.setState({ showVideo: true, blur: true });
-        setTimeout(() => this.setState({ linkVideo: currentContentObject.linkVideo }), 50);
+        const { currentContentObject, showMenu } = this.state;
+        if (showMenu !== true) {
+            this.setState({ showVideo: true, blur: true });
+            setTimeout(() => this.setState({ linkVideo: currentContentObject.linkVideo }), 50);
+        }
     }
-    
+
     hideVideo = () => {
         this.setState({ showVideo: false, blur: false, linkVideo: '' });
     }
