@@ -157,21 +157,19 @@ class App extends Component {
     }
 
     touchStart = (e) => {
-        const firstTouchX = e.touches[0].clientX;
-        const firstTouchY = e.touches[0].clientY;
+        const {clientX: firstTouchX, clientY: firstTouchY} = e.touches[0];
         this.setState({ coordX: firstTouchX, coordY: firstTouchY });
     };
 
     touchMove = (e) => {
-        const { coordX, coordY, screenWidth, screenHeight } = this.state;
+        const { coordX, coordY } = this.state;
+        const { screenWidth, screenHeight } = window;
         if (!coordX || !coordY) {
             return false
         };
-        let finalCoordX = e.touches[0].clientX;
-        let finalCoordY = e.touches[0].clientY;
-        let diffX = finalCoordX - coordX;
-        let diffY = finalCoordY - coordY;
-
+        let diffX = e.touches[0].clientX - coordX;
+        let diffY = e.touches[0].clientY - coordY;
+        
         if (Math.abs(diffX) > Math.abs(diffY)) {
             if (diffX > (screenWidth / 7)) {
                 this.move('idLeft');
