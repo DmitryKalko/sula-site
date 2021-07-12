@@ -106,52 +106,17 @@ class App extends Component {
             idRight: needNavigationObject[0].idRight,
         });
     }
-    goToUp = () => {
+
+    move = (way) => {
         const { currentNavigationObject, showMenu } = this.state;
-        if (showMenu !== true) {
-            if (currentNavigationObject.idUp !== null) {
-                this.setState({ currentSlideId: currentNavigationObject.idUp });
-            }
-            setTimeout(() => {
+        if (!showMenu && currentNavigationObject[way]) {
+            this.setState({ currentSlideId: currentNavigationObject[way] },()=>{
                 this.setNavigation();
                 this.setContent();
-            }, 100);
+            });
         }
     }
-    goToDown = () => {
-        const { currentNavigationObject, showMenu } = this.state;
-        if (showMenu !== true) {
-            if (currentNavigationObject.idDown !== null) {
-                this.setState({ currentSlideId: currentNavigationObject.idDown });
-            }
-            setTimeout(() => {
-                this.setNavigation();
-                this.setContent();
-            }, 100);
-        }
-    }
-    goToRight = () => {
-        const { currentNavigationObject, showMenu } = this.state;
-        if (showMenu !== true) {
-            if (currentNavigationObject.idRight !== null) {
-                this.setState({ currentSlideId: currentNavigationObject.idRight });
-            }
-            setTimeout(() => {
-                this.setNavigation();
-                this.setContent();
-            }, 100);
-        }
-    }
-    goToLeft = () => {
-        const { currentNavigationObject } = this.state;
-        if (currentNavigationObject.idLeft !== null) {
-            this.setState({ currentSlideId: currentNavigationObject.idLeft });
-        }
-        setTimeout(() => {
-            this.setNavigation();
-            this.setContent();
-        }, 100);
-    }
+
     goToStart = () => {
         const { showMenu } = this.state;
         if (showMenu !== true) {
@@ -170,32 +135,26 @@ class App extends Component {
         }
     }
 
-    showVideo = () => {
-        const { currentContentObject, showMenu } = this.state;
-        if (showMenu !== true) {
-            this.setState({ showVideo: true, blur: true });
-            setTimeout(() => this.setState({ linkVideo: currentContentObject.linkVideo }), 50);
+    toggleVideo = () => {
+        const { currentContentObject, showMenu, showVideo } = this.state;
+        if (!showMenu && !showVideo) {
+            this.setState({ showVideo: true, blur: true, linkVideo: currentContentObject.linkVideo });
+        } else if (showVideo) {
+            this.setState({ showVideo: false, blur: false, linkVideo: '' });
         }
     }
 
-    hideVideo = () => {
-        this.setState({ showVideo: false, blur: false, linkVideo: '' });
-    }
-
-    showMenu = () => {
-        const { showMenu, blurAll } = this.state;
-        this.setState({ showMenu: !showMenu, blurAll: !blurAll });
-    }
-    closeMenu = () => {
+    toggleMenu = (e) => {
         const { showMenu, blurAll } = this.state;
         if (showMenu === true) {
             this.setState({ showMenu: false, showSecondMenu: false, blurAll: !blurAll });
+        } else if (e.target.className === 'burger-menu'){
+            this.setState({ showMenu: true, blurAll: !blurAll });
         }
     }
 
     openSecondMenu = () => {
-        const { showSecondMenu } = this.state;
-        this.setState({ showSecondMenu: !showSecondMenu });
+        this.setState({ showSecondMenu: !this.state.showSecondMenu });
     }
 
     touchStart = (e) => {
@@ -216,18 +175,18 @@ class App extends Component {
 
         if (Math.abs(diffX) > Math.abs(diffY)) {
             if (diffX > (screenWidth / 7)) {
-                this.goToLeft();
+                this.move('idLeft');
                 this.setState({ coordX: null });
             } else if (diffX < -(screenWidth / 7)) {
-                this.goToRight();
+                this.move('idRight');
                 this.setState({ coordX: null });
             }
         } else {
             if (diffY > (screenHeight / 7)) {
-                this.goToUp();
+                this.move('idUp')();
                 this.setState({ coordY: null });
             } else if (diffY < -(screenHeight / 7)) {
-                this.goToDown();
+                this.move('idDown');
                 this.setState({ coordY: null });
             }
         }
@@ -258,9 +217,8 @@ class App extends Component {
             idDown,
             idLeft,
             idRight,
-            screenWidth,
         } = this.state;
-
+        
         return (
             <>
                 <div className='all-wrapper' style={blurAll === true ? { filter: 'blur(5px)' } : { filter: 'blur(0px)' }} >
@@ -279,7 +237,7 @@ class App extends Component {
                     </div>
                     <div className='main-screen'
                         style={blur === true ? { display: 'none' } : { display: 'flex' }}
-                        onClick={this.closeMenu}
+                        onClick={this.toggleMenu}
                         onTouchStart={this.touchStart}
                         onTouchMove={this.touchMove}
                     >
@@ -287,7 +245,7 @@ class App extends Component {
                             style={idUp === null ? { display: 'none' } : { position: 'absolute' }}
                             src={PUBLIC_URL + '/images/arrow.svg'}
                             alt='top-scroll'
-                            onClick={this.goToUp}
+                            onClick={()=>this.move('idUp')}
                         />
                         <div className='top-lavel'
                             style={showMenu === true ? { justifyContent: 'flex-end' } : { justifyContent: 'space-between' }}
@@ -321,18 +279,18 @@ class App extends Component {
                                     style={idLeft === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
                                     src={PUBLIC_URL + '/images/arrow.svg'}
                                     alt='left-scroll'
-                                    onClick={this.goToLeft}
+                                    onClick={()=>this.move('idLeft')}
                                 />
                                 <img className='play-video'
                                     src={PUBLIC_URL + '/images/play.svg'}
                                     alt='play-video'
-                                    onClick={this.showVideo}
+                                    onClick={this.toggleVideo}
                                 />
                                 <img className='right-scroll'
                                     style={idRight === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
                                     src={PUBLIC_URL + '/images/arrow.svg'}
                                     alt='right-scroll'
-                                    onClick={this.goToRight}
+                                    onClick={()=>this.move('idRight')}
                                 />
                             </div>
                         </div>
@@ -358,7 +316,7 @@ class App extends Component {
                             style={idDown === null ? { display: 'none' } : { position: 'absolute' }}
                             src={PUBLIC_URL + '/images/arrow.svg'}
                             alt='down-scroll'
-                            onClick={this.goToDown}
+                            onClick={()=>this.move('idDown')}
                         />
                     </div>
                 </div>
@@ -377,7 +335,7 @@ class App extends Component {
                 />
                 <Video
                     showVideo={showVideo}
-                    closeVideo={this.hideVideo}
+                    closeVideo={this.toggleVideo}
                     linkVideo={linkVideo}
                 />
                 <Menu
