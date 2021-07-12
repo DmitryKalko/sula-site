@@ -119,12 +119,11 @@ class App extends Component {
 
     goToStart = () => {
         const { showMenu } = this.state;
-        if (showMenu !== true) {
-            this.setState({ currentSlideId: 1 });
-            setTimeout(() => {
+        if (!showMenu) {
+            this.setState({ currentSlideId: 1 }, () => {
                 this.setNavigation();
                 this.setContent();
-            }, 100);
+            });
         }
     }
 
