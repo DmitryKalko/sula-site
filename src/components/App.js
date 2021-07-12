@@ -9,6 +9,9 @@ import Video from './Video';
 import Menu from './Menu';
 import { socialMedia } from "../db/SocialN";
 
+const PUBLIC_URL = process.env.PUBLIC_URL;
+const isItMobileLayout = window.screenWidth < 765;
+
 class App extends Component {
     constructor() {
         super();
@@ -277,10 +280,10 @@ class App extends Component {
                     >
                         <div
                             className='back'
-                            style={screenWidth > 765 ?
-                                { backgroundImage: `url(${process.env.PUBLIC_URL + '/pagesImg/' + linkImg})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }
+                            style={!isItMobileLayout ?
+                                { backgroundImage: `url(${PUBLIC_URL + '/pagesImg/' + linkImg})`, transform: 'translate(-' + shiftX + 'px, -' + shiftY + 'px)' }
                                 :
-                                { backgroundImage: `url(${process.env.PUBLIC_URL + '/pagesImg/' + linkImg})` }
+                                { backgroundImage: `url(${PUBLIC_URL + '/pagesImg/' + linkImg})` }
                             }
                         >
                         </div>
@@ -293,7 +296,7 @@ class App extends Component {
                     >
                         <img className='top-scroll'
                             style={idUp === null ? { display: 'none' } : { position: 'absolute' }}
-                            src={process.env.PUBLIC_URL + '/images/arrow.svg'}
+                            src={PUBLIC_URL + '/images/arrow.svg'}
                             alt='top-scroll'
                             onClick={this.goToUp}
                         />
@@ -304,8 +307,8 @@ class App extends Component {
                                 style={showMenu === true ? { display: 'none' } : { display: 'flex' }}
                             >
                                 <img
-                                    className='burger-menu' src={process.env.PUBLIC_URL + '/images/burger.svg'} alt='burger'
-                                    onClick={this.showMenu}
+                                    className='burger-menu' src={PUBLIC_URL + '/images/burger.svg'} alt='burger'
+                                    onClick={this.toggleMenu}
                                 />
                                 <div className='title-texts'>
                                     <div className='main-title'>
@@ -316,29 +319,29 @@ class App extends Component {
                                 </div>
                             </div>
                             <img className='herb'
-                                src={process.env.PUBLIC_URL + '/images/herb.svg'}
+                                src={PUBLIC_URL + '/images/herb.svg'}
                                 alt='herb'
                                 onClick={this.goToStart}
                             />
                         </div>
                         <div className='navigation-wrapper'>
                             <div className='navigation-block'
-                                style={idLeft === null || screenWidth < 765 ? { justifyContent: 'center' } : { justifyContent: 'space-between' }}
+                                style={idLeft === null || isItMobileLayout ? { justifyContent: 'center' } : { justifyContent: 'space-between' }}
                             >
                                 <img className='left-scroll'
-                                    style={idLeft === null || screenWidth < 765 ? { display: 'none' } : { display: 'flex' }}
-                                    src={process.env.PUBLIC_URL + '/images/arrow.svg'}
+                                    style={idLeft === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
+                                    src={PUBLIC_URL + '/images/arrow.svg'}
                                     alt='left-scroll'
                                     onClick={this.goToLeft}
                                 />
                                 <img className='play-video'
-                                    src={process.env.PUBLIC_URL + '/images/play.svg'}
+                                    src={PUBLIC_URL + '/images/play.svg'}
                                     alt='play-video'
                                     onClick={this.showVideo}
                                 />
                                 <img className='right-scroll'
-                                    style={idRight === null || screenWidth < 765 ? { display: 'none' } : { display: 'flex' }}
-                                    src={process.env.PUBLIC_URL + '/images/arrow.svg'}
+                                    style={idRight === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
+                                    src={PUBLIC_URL + '/images/arrow.svg'}
                                     alt='right-scroll'
                                     onClick={this.goToRight}
                                 />
@@ -364,7 +367,7 @@ class App extends Component {
 
                         <img className='down-scroll'
                             style={idDown === null ? { display: 'none' } : { position: 'absolute' }}
-                            src={process.env.PUBLIC_URL + '/images/arrow.svg'}
+                            src={PUBLIC_URL + '/images/arrow.svg'}
                             alt='down-scroll'
                             onClick={this.goToDown}
                         />
