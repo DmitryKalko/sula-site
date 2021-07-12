@@ -2,9 +2,7 @@ import React from 'react';
 
 import './styles/Video.scss';
 
-const Video = (props) => {
-    const { showVideo, closeVideo, linkVideo } = props;
-
+const Video = ({ showVideo, closeVideo, linkVideo }) => {
     return (
 
         <div className='video'

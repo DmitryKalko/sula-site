@@ -1,8 +1,6 @@
 import './styles/Menu.scss';
 
-const Menu = (props) => {
-	const { showMenu, openSecondMenu, showSecondMenu } = props;
-
+const Menu = ({ showMenu, openSecondMenu, showSecondMenu }) => {
 	return (
 		<>
 			<div className='menu'

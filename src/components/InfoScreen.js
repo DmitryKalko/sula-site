@@ -2,8 +2,7 @@ import React from 'react';
 
 import './styles/InfoScreen.scss';
 
-const InfoScreen = (props) => {
-    const { name1, name2, name3, slogan, text, comment1, comment2, comment3, closeInfoScreen, showInfoScreen } = props;
+const InfoScreen = ({ name1, name2, name3, slogan, text, comment1, comment2, comment3, closeInfoScreen, showInfoScreen }) => {
     return (
         <div className='info-screen'
             style={showInfoScreen === true ? { display: 'flex' } : { display: 'none' }}
