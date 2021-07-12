@@ -7,6 +7,7 @@ import { textsDb } from '../db/textsDB';
 import InfoScreen from "./InfoScreen";
 import Video from './Video';
 import Menu from './Menu';
+import { socialMedia } from "../db/SocialN";
 
 class App extends Component {
     constructor() {
@@ -358,11 +359,7 @@ class App extends Component {
 
                         <div className='social'>
                             {/* повставлять ссылки на соцсети */}
-                            <img src={process.env.PUBLIC_URL + '/images/f.svg'} alt='facebook' />
-                            <img src={process.env.PUBLIC_URL + '/images/g.svg'} alt='google' />
-                            <img src={process.env.PUBLIC_URL + '/images/t.svg'} alt='twitter' />
-                            <img src={process.env.PUBLIC_URL + '/images/i.svg'} alt='instagram' />
-                            <img src={process.env.PUBLIC_URL + '/images/boll.svg'} alt='boll' />
+                            {socialMedia.map(({id,title,url}) => <img key={id} src={PUBLIC_URL + url} alt={title} />)}
                         </div>
 
                         <img className='down-scroll'
