@@ -13,44 +13,38 @@ const PUBLIC_URL = process.env.PUBLIC_URL;
 const isItMobileLayout = window.screenWidth < 765;
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            currentSlideId: 1,
-            idUp: null,
-            idDown: null,
-            idLeft: null,
-            idRight: null,
-            navigationDb: navigationDb,
-            textsDb: textsDb,
-            currentNavigationObject: null,
-            currentContentObject: null,
-            name1: '',
-            name2: '',
-            name3: '',
-            fullName: '',
-            slogan: '',
-            text: '',
-            comment1: '',
-            comment2: '',
-            comment3: '',
-            linkImg: '',
-            linkVideo: '',
-            showMenu: false,
-            showSecondMenu: false,
-            showInfoScreen: false,
-            showVideo: false,
-            blur: false,
-            blurAll: false,
-            shiftX: null,
-            shiftY: null,
-            coordX: null,
-            coordY: null,
-            screenWidth: null,
-            screenHeight: null,
-        };
-        this._isMounted = false;
-    }
+    state = {
+        currentSlideId: 1,
+        idUp: null,
+        idDown: null,
+        idLeft: null,
+        idRight: null,
+        navigationDb: navigationDb,
+        textsDb: textsDb,
+        currentNavigationObject: null,
+        currentContentObject: null,
+        name1: '',
+        name2: '',
+        name3: '',
+        fullName: '',
+        slogan: '',
+        text: '',
+        comment1: '',
+        comment2: '',
+        comment3: '',
+        linkImg: '',
+        linkVideo: '',
+        showMenu: false,
+        showSecondMenu: false,
+        showInfoScreen: false,
+        showVideo: false,
+        blur: false,
+        blurAll: false,
+        shiftX: null,
+        shiftY: null,
+        coordX: null,
+        coordY: null,
+    };
 
     componentDidMount() {
         this._isMounted = true;
@@ -62,28 +56,22 @@ class App extends Component {
         } else {
             this.setState({ currentSlideId: needId });
         }
-        this.setState({
-            screenWidth: window.innerWidth,
-            screenHeight: window.innerHeight
-        });
-        setTimeout(() => this.setOpionals(), 50);
-    }
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
-
-    setOpionals = () => {
         this.setContent();
         this.setNavigation();
         this.parallax();
+        document.addEventListener('mousemove', this.parallax);
+    }
+    
+    componentWillUnmount() {
+        document.removeEventListener('mousemove', this.parallax);
     }
 
-    parallax = () => {
-        document.addEventListener('mousemove', e => {
+    parallax = (e) => {
+        if(e) {
             let x = e.pageX / window.innerWidth;
             let y = e.pageY / window.innerHeight;
             this.setState({ shiftX: x * 50, shiftY: y * 50 });
-        });
+        }
     }
 
     setContent = () => {
@@ -105,6 +93,7 @@ class App extends Component {
             // linkVideo: needContentObject[0].linkVideo,
         });
     }
+
     setNavigation = () => {
         const { navigationDb, currentSlideId } = this.state;
         let needNavigationObject = navigationDb.filter(item => item.id === Number(currentSlideId));
