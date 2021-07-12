@@ -129,7 +129,7 @@ class App extends Component {
 
     showInfoSrceen = () => {
         const { showInfoScreen, blur, showMenu } = this.state;
-        if (showMenu !== true) {
+        if (!showMenu) {
             this.setState({ showInfoScreen: !showInfoScreen, blur: !blur });
         }
     }
@@ -218,9 +218,9 @@ class App extends Component {
         
         return (
             <>
-                <div className='all-wrapper' style={blurAll === true ? { filter: 'blur(5px)' } : { filter: 'blur(0px)' }} >
+                <div className='all-wrapper' style={blurAll ? { filter: 'blur(5px)' } : { filter: 'blur(0px)' }} >
                     <div className='wrapper'
-                        style={blur === true ? { filter: 'blur(10px)' } : { filter: 'blur(0px)' }}
+                        style={blur ? { filter: 'blur(10px)' } : { filter: 'blur(0px)' }}
                     >
                         <div
                             className='back'
@@ -233,7 +233,7 @@ class App extends Component {
                         </div>
                     </div>
                     <div className='main-screen'
-                        style={blur === true ? { display: 'none' } : { display: 'flex' }}
+                        style={blur ? { display: 'none' } : { display: 'flex' }}
                         onClick={this.toggleMenu}
                         onTouchStart={this.touchStart}
                         onTouchMove={this.touchMove}
@@ -245,10 +245,10 @@ class App extends Component {
                             onClick={()=>this.move('idUp')}
                         />
                         <div className='top-lavel'
-                            style={showMenu === true ? { justifyContent: 'flex-end' } : { justifyContent: 'space-between' }}
+                            style={showMenu ? { justifyContent: 'flex-end' } : { justifyContent: 'space-between' }}
                         >
                             <div className='menu-page-title'
-                                style={showMenu === true ? { display: 'none' } : { display: 'flex' }}
+                                style={showMenu ? { display: 'none' } : { display: 'flex' }}
                             >
                                 <img
                                     className='burger-menu' src={PUBLIC_URL + '/images/burger.svg'} alt='burger'
