@@ -56,8 +56,7 @@ class App extends Component {
         } else {
             this.setState({ currentSlideId: needId });
         }
-        this.setContent();
-        this.setNavigation();
+        this.setInfo();
         this.parallax();
         document.addEventListener('mousemove', this.parallax);
     }
@@ -67,53 +66,29 @@ class App extends Component {
     }
 
     parallax = (e) => {
-        if(e) {
+        if (e) {
             let x = e.pageX / window.innerWidth;
             let y = e.pageY / window.innerHeight;
             this.setState({ shiftX: x * 50, shiftY: y * 50 });
         }
     }
 
-    setContent = () => {
-        const { textsDb, currentSlideId } = this.state;
-        let needContentObject = textsDb.filter(item => item.id === Number(currentSlideId));
-        //console.log(needContentObject[0]);
-        this.setState({
-            currentContentObject: needContentObject[0],
-            name1: needContentObject[0].name1,
-            name2: needContentObject[0].name2,
-            name3: needContentObject[0].name3,
-            fullName: needContentObject[0].fullName,
-            slogan: needContentObject[0].slogan,
-            text: needContentObject[0].text,
-            comment1: needContentObject[0].comment1,
-            comment2: needContentObject[0].comment2,
-            comment3: needContentObject[0].comment3,
-            linkImg: needContentObject[0].linkImg,
+    setInfo = () => {
+        const { navigationDb, textsDb, currentSlideId } = this.state;
+        const needNavigationObject = navigationDb.filter(item => item.id === Number(currentSlideId));
+        const needContentObject = textsDb.filter(item => item.id === Number(currentSlideId));
+        const {name1, name2, name3, fullName, slogan, text, comment1, comment2, comment3, linkImg} = needContentObject[0];
+        const {idUp, idDown, idLeft, idRight} = needNavigationObject[0];
+        this.setState({ currentContentObject: needContentObject[0], name1, name2, name3, fullName, slogan, text, comment1, 
+            comment2, comment3, linkImg, currentNavigationObject: needNavigationObject[0], idUp, idDown, idLeft, idRight, 
             // linkVideo: needContentObject[0].linkVideo,
-        });
-    }
-
-    setNavigation = () => {
-        const { navigationDb, currentSlideId } = this.state;
-        let needNavigationObject = navigationDb.filter(item => item.id === Number(currentSlideId));
-        //console.log(needNavigationObject[0]);
-        this.setState({
-            currentNavigationObject: needNavigationObject[0],
-            idUp: needNavigationObject[0].idUp,
-            idDown: needNavigationObject[0].idDown,
-            idLeft: needNavigationObject[0].idLeft,
-            idRight: needNavigationObject[0].idRight,
         });
     }
 
     navigationMove = (way) => {
         const { currentNavigationObject, showMenu } = this.state;
         if ((!showMenu && currentNavigationObject[way]) || way === 'start') {
-            this.setState({ currentSlideId: currentNavigationObject[way] || 1 },() => {
-                this.setNavigation();
-                this.setContent();
-            });
+            this.setState({ currentSlideId: currentNavigationObject[way] || 1 }, this.setInfo);
         } 
     }
 
