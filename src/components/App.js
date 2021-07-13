@@ -107,24 +107,14 @@ class App extends Component {
         });
     }
 
-    move = (way) => {
+    navigationMove = (way) => {
         const { currentNavigationObject, showMenu } = this.state;
-        if (!showMenu && currentNavigationObject[way]) {
-            this.setState({ currentSlideId: currentNavigationObject[way] },()=>{
+        if ((!showMenu && currentNavigationObject[way]) || way === 'start') {
+            this.setState({ currentSlideId: currentNavigationObject[way] || 1 },() => {
                 this.setNavigation();
                 this.setContent();
             });
-        }
-    }
-
-    goToStart = () => {
-        const { showMenu } = this.state;
-        if (!showMenu) {
-            this.setState({ currentSlideId: 1 }, () => {
-                this.setNavigation();
-                this.setContent();
-            });
-        }
+        } 
     }
 
     showInfoSrceen = () => {
@@ -172,18 +162,18 @@ class App extends Component {
         
         if (Math.abs(diffX) > Math.abs(diffY)) {
             if (diffX > (screenWidth / 7)) {
-                this.move('idLeft');
+                this.navigationMove('idLeft');
                 this.setState({ coordX: null });
             } else if (diffX < -(screenWidth / 7)) {
-                this.move('idRight');
+                this.navigationMove('idRight');
                 this.setState({ coordX: null });
             }
         } else {
             if (diffY > (screenHeight / 7)) {
-                this.move('idUp')();
+                this.navigationMove('idUp')();
                 this.setState({ coordY: null });
             } else if (diffY < -(screenHeight / 7)) {
-                this.move('idDown');
+                this.navigationMove('idDown');
                 this.setState({ coordY: null });
             }
         }
@@ -242,7 +232,7 @@ class App extends Component {
                             style={idUp === null ? { display: 'none' } : { position: 'absolute' }}
                             src={PUBLIC_URL + '/images/arrow.svg'}
                             alt='top-scroll'
-                            onClick={()=>this.move('idUp')}
+                            onClick={()=>this.navigationMove('idUp')}
                         />
                         <div className='top-lavel'
                             style={showMenu ? { justifyContent: 'flex-end' } : { justifyContent: 'space-between' }}
@@ -265,7 +255,7 @@ class App extends Component {
                             <img className='herb'
                                 src={PUBLIC_URL + '/images/herb.svg'}
                                 alt='herb'
-                                onClick={this.goToStart}
+                                onClick={()=>this.navigationMove('start')}
                             />
                         </div>
                         <div 
@@ -276,7 +266,7 @@ class App extends Component {
                                 style={idLeft === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
                                 src={PUBLIC_URL + '/images/arrow.svg'}
                                 alt='left-scroll'
-                                onClick={()=>this.move('idLeft')}
+                                onClick={()=>this.navigationMove('idLeft')}
                             />
                             <img className='play-video'
                                 src={PUBLIC_URL + '/images/play.svg'}
@@ -287,7 +277,7 @@ class App extends Component {
                                 style={idRight === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
                                 src={PUBLIC_URL + '/images/arrow.svg'}
                                 alt='right-scroll'
-                                onClick={()=>this.move('idRight')}
+                                onClick={()=>this.navigationMove('idRight')}
                             />
                         </div>
                         <div className='content-wrapper'>
@@ -310,7 +300,7 @@ class App extends Component {
                             style={idDown === null ? { display: 'none' } : { position: 'absolute' }}
                             src={PUBLIC_URL + '/images/arrow.svg'}
                             alt='down-scroll'
-                            onClick={()=>this.move('idDown')}
+                            onClick={()=>this.navigationMove('idDown')}
                         />
                     </div>
                 </div>
