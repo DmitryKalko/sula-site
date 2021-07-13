@@ -268,40 +268,37 @@ class App extends Component {
                                 onClick={this.goToStart}
                             />
                         </div>
-                        <div className='navigation-wrapper'>
-                            <div className='navigation-block'
-                                style={idLeft === null || isItMobileLayout ? { justifyContent: 'center' } : { justifyContent: 'space-between' }}
-                            >
-                                <img className='left-scroll'
-                                    style={idLeft === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
-                                    src={PUBLIC_URL + '/images/arrow.svg'}
-                                    alt='left-scroll'
-                                    onClick={()=>this.move('idLeft')}
-                                />
-                                <img className='play-video'
-                                    src={PUBLIC_URL + '/images/play.svg'}
-                                    alt='play-video'
-                                    onClick={this.toggleVideo}
-                                />
-                                <img className='right-scroll'
-                                    style={idRight === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
-                                    src={PUBLIC_URL + '/images/arrow.svg'}
-                                    alt='right-scroll'
-                                    onClick={()=>this.move('idRight')}
-                                />
-                            </div>
+                        <div 
+                            className='navigation-wrapper'
+                            style={idLeft === null || isItMobileLayout ? { justifyContent: 'center' } : { justifyContent: 'space-between' }}
+                        >
+                            <img className='left-scroll'
+                                style={idLeft === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
+                                src={PUBLIC_URL + '/images/arrow.svg'}
+                                alt='left-scroll'
+                                onClick={()=>this.move('idLeft')}
+                            />
+                            <img className='play-video'
+                                src={PUBLIC_URL + '/images/play.svg'}
+                                alt='play-video'
+                                onClick={this.toggleVideo}
+                            />
+                            <img className='right-scroll'
+                                style={idRight === null || isItMobileLayout ? { display: 'none' } : { display: 'flex' }}
+                                src={PUBLIC_URL + '/images/arrow.svg'}
+                                alt='right-scroll'
+                                onClick={()=>this.move('idRight')}
+                            />
                         </div>
                         <div className='content-wrapper'>
-                            <div className='content-block'>
-                                <div className='name1-name2'>
-                                    <p className='name1'>{name1}</p>
-                                    <p className='name2'>{name2}</p>
-                                </div>
-                                <p className='name3'>{name3}</p>
-                                <p className='slogan'>{slogan}</p>
-                                <p className='text'>{text}</p>
-                                <p className='more' onClick={this.showInfoSrceen}>подробнее</p>
+                            <div className='name1-name2'>
+                                <p className='name1'>{name1}</p>
+                                <p className='name2'>{name2}</p>
                             </div>
+                            <p className='name3'>{name3}</p>
+                            <p className='slogan'>{slogan}</p>
+                            <p className='text'>{text}</p>
+                            <p className='more' onClick={this.showInfoSrceen}>подробнее</p>
                         </div>
 
                         <div className='social'>
