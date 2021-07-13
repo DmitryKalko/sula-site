@@ -30,4 +30,4 @@ const InfoScreen = ({ name1, name2, name3, slogan, text, comment1, comment2, com
     );
 };
 
-export default InfoScreen;
+export default React.memo(InfoScreen);

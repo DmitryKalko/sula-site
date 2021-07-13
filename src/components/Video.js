@@ -4,7 +4,6 @@ import './styles/Video.scss';
 
 const Video = ({ showVideo, closeVideo, linkVideo }) => {
     return (
-
         <div className='video'
             style={showVideo === true ? { display: 'flex' } : { display: 'none' }}
             onClick={closeVideo}
@@ -22,4 +21,4 @@ const Video = ({ showVideo, closeVideo, linkVideo }) => {
     );
 };
 
-export default Video;
+export default React.memo(Video);

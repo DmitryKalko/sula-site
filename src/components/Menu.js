@@ -1,4 +1,5 @@
 import './styles/Menu.scss';
+import React from 'react'
 
 const Menu = ({ showMenu, openSecondMenu, showSecondMenu }) => {
 	return (
@@ -39,4 +40,4 @@ const Menu = ({ showMenu, openSecondMenu, showSecondMenu }) => {
 	);
 };
 
-export default Menu;
+export default React.memo(Menu);
