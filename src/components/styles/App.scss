@@ -18,12 +18,13 @@ $height: 100%;
 .all-wrapper{
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
-  overflow-y: hidden;
+  overflow: hidden;
+  background: linear-gradient(19.5deg, #2E2D33 2.51%, #2E2D33 2.52%, #2E2D33 11.67%, rgba(46, 45, 51, 0) 61.55%);
 }
 .wrapper{
     height: 100%;
     position: relative;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 .back{ 
     position: absolute;
@@ -33,6 +34,7 @@ $height: 100%;
     overflow-y: hidden;
     background-position: center;
     transition: all 0.8s ease;
+    z-index: 1;
 }
 .main-screen{
     position: absolute;
@@ -44,6 +46,7 @@ $height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: linear-gradient(19.5deg, #2E2D33 2.51%, #2E2D33 2.52%, #2E2D33 11.67%, rgba(46, 45, 51, 0) 61.55%);
 }
 .herb{
     cursor: pointer;
@@ -144,6 +147,10 @@ $height: 100%;
     font-size: 24px;
     //font-weight: 900;
     font-weight: bold;
+}
+.name3{
+    font-weight: bold;
+    font-size: 14px;
 }
 .slogan{
     font-family: 'Playfair Display', serif;
