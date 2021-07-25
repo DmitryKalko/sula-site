@@ -7,6 +7,7 @@ import { textsDb } from '../db/textsDB';
 import InfoScreen from "./InfoScreen";
 import Video from './Video';
 import Menu from './Menu';
+import PageNotFound from './PageNotFound';
 
 class App extends Component {
     constructor() {
@@ -44,6 +45,7 @@ class App extends Component {
             coordY: null,
             screenWidth: null,
             screenHeight: null,
+            pageNotFound: false,
         };
         this._isMounted = false;
     }
@@ -54,7 +56,7 @@ class App extends Component {
         let needId = currentUrl.slice(currentUrl.indexOf('=') + 1);
         //console.log(needId);
         if (needId.length > 10) {
-            this.setState({ currentSlideId: 1 });
+            this.setState({ currentSlideId: 1 });  //перенаправляет на главную страницу
         } else {
             this.setState({ currentSlideId: needId });
         }
@@ -64,6 +66,7 @@ class App extends Component {
         });
         setTimeout(() => this.setOpionals(), 50);
     }
+
     componentWillUnmount() {
         this._isMounted = false;
     }
@@ -85,33 +88,50 @@ class App extends Component {
     setContent = () => {
         const { textsDb, currentSlideId } = this.state;
         let needContentObject = textsDb.filter(item => item.id === Number(currentSlideId));
-        //console.log(needContentObject[0]);
-        this.setState({
-            currentContentObject: needContentObject[0],
-            name1: needContentObject[0].name1,
-            name2: needContentObject[0].name2,
-            name3: needContentObject[0].name3,
-            fullName: needContentObject[0].fullName,
-            slogan: needContentObject[0].slogan,
-            text: needContentObject[0].text,
-            comment1: needContentObject[0].comment1,
-            comment2: needContentObject[0].comment2,
-            comment3: needContentObject[0].comment3,
-            linkImg: needContentObject[0].linkImg,
-            // linkVideo: needContentObject[0].linkVideo,
-        });
+        if (needContentObject[0] !== undefined) {
+            this.setState({
+                currentContentObject: needContentObject[0],
+                name1: needContentObject[0].name1,
+                name2: needContentObject[0].name2,
+                name3: needContentObject[0].name3,
+                fullName: needContentObject[0].fullName,
+                slogan: needContentObject[0].slogan,
+                text: needContentObject[0].text,
+                comment1: needContentObject[0].comment1,
+                comment2: needContentObject[0].comment2,
+                comment3: needContentObject[0].comment3,
+                linkImg: needContentObject[0].linkImg,
+                // linkVideo: needContentObject[0].linkVideo,
+            });
+        } else {
+            this.setState({
+                name2: 'ПРОСИМ ПРОЩЕНИЯ ЗА НЕУДОБСТВА',
+                slogan: 'ТАКОГО ОБЪЕКТА НЕ СУЩЕСТВУЕТ ЛИБО ОН НАХОДИТСЯ В РАЗРАБОТКЕ',
+                pageNotFound: true,
+            });
+        }
+
     }
     setNavigation = () => {
         const { navigationDb, currentSlideId } = this.state;
         let needNavigationObject = navigationDb.filter(item => item.id === Number(currentSlideId));
-        //console.log(needNavigationObject[0]);
-        this.setState({
-            currentNavigationObject: needNavigationObject[0],
-            idUp: needNavigationObject[0].idUp,
-            idDown: needNavigationObject[0].idDown,
-            idLeft: needNavigationObject[0].idLeft,
-            idRight: needNavigationObject[0].idRight,
-        });
+        if (needNavigationObject[0] !== undefined) {
+            this.setState({
+                currentNavigationObject: needNavigationObject[0],
+                idUp: needNavigationObject[0].idUp,
+                idDown: needNavigationObject[0].idDown,
+                idLeft: needNavigationObject[0].idLeft,
+                idRight: needNavigationObject[0].idRight,
+            });
+        } else {
+            this.setState({
+                idUp: null,
+                idDown: null,
+                idLeft: null,
+                idRight: null,
+            });
+        }
+
     }
     goToUp = () => {
         const { currentNavigationObject, showMenu } = this.state;
@@ -162,7 +182,7 @@ class App extends Component {
     goToStart = () => {
         const { showMenu } = this.state;
         if (showMenu !== true) {
-            this.setState({ currentSlideId: 1 });
+            this.setState({ currentSlideId: 1, pageNotFound: false });
             setTimeout(() => {
                 this.setNavigation();
                 this.setContent();
@@ -266,6 +286,8 @@ class App extends Component {
             idLeft,
             idRight,
             screenWidth,
+            screenHeight,
+            pageNotFound,
         } = this.state;
 
         return (
@@ -331,6 +353,7 @@ class App extends Component {
                                     onClick={this.goToLeft}
                                 />
                                 <img className='play-video'
+                                    style={pageNotFound === true ? { display: 'none' } : { display: 'flex' }}
                                     src={process.env.PUBLIC_URL + '/images/play.svg'}
                                     alt='play-video'
                                     onClick={this.showVideo}
@@ -352,7 +375,9 @@ class App extends Component {
                                 <p className='name3'>{name3}</p>
                                 <p className='slogan'>{slogan}</p>
                                 <p className='text'>{text}</p>
-                                <p className='more' onClick={this.showInfoSrceen}>подробнее</p>
+                                <p className='more'
+                                    style={pageNotFound === true ? { display: 'none' } : { display: 'block' }}
+                                    onClick={this.showInfoSrceen}>подробнее</p>
                             </div>
                         </div>
 
@@ -395,6 +420,12 @@ class App extends Component {
                     showMenu={showMenu}
                     showSecondMenu={showSecondMenu}
                     openSecondMenu={this.openSecondMenu}
+                />
+                <PageNotFound
+                lottieClick={this.closeMenu}
+                pageNotFound={pageNotFound}
+                screenHeight={screenHeight}
+                screenWidth={screenWidth}
                 />
             </>
         );
