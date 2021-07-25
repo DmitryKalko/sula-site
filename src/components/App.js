@@ -376,7 +376,7 @@ class App extends Component {
                                 <p className='slogan'>{slogan}</p>
                                 <p className='text'>{text}</p>
                                 <p className='more'
-                                    style={pageNotFound === true ? { display: 'none' } : { display: 'block' }}
+                                    style={pageNotFound === true || screenWidth < 765 ? { display: 'none' } : { display: 'block' }}
                                     onClick={this.showInfoSrceen}>подробнее</p>
                             </div>
                         </div>

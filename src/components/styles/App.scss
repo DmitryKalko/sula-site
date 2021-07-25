@@ -17,6 +17,7 @@ $height: 100%;
 }
 .all-wrapper{
   position: absolute;
+  z-index: 2;
   top: 0; left: 0; bottom: 0; right: 0;
   overflow: hidden;
   background: linear-gradient(19.5deg, #2E2D33 2.51%, #2E2D33 2.52%, #2E2D33 11.67%, rgba(46, 45, 51, 0) 61.55%);
