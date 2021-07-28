@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 import './styles/App.scss';
 import { navigationDb } from '../db/navigationDB';
@@ -8,6 +8,7 @@ import InfoScreen from "./InfoScreen";
 import Video from './Video';
 import Menu from './Menu';
 import PageNotFound from './PageNotFound';
+//import BackImage from './BackImage';
 
 class App extends Component {
     constructor() {
@@ -53,6 +54,7 @@ class App extends Component {
     componentDidMount() {
         this._isMounted = true;
         let currentUrl = window.location.href;
+
         let needId = currentUrl.slice(currentUrl.indexOf('=') + 1);
         //console.log(needId);
         if (needId.length > 10) {
@@ -304,6 +306,10 @@ class App extends Component {
                                 { backgroundImage: `url(${process.env.PUBLIC_URL + '/pagesImg/' + linkImg})` }
                             }
                         >
+                            {/* <BackImage
+                                screenWidth={screenWidth}
+                                linkImg={linkImg}
+                            /> */}
                         </div>
                     </div>
                     <div className='main-screen'
@@ -377,7 +383,7 @@ class App extends Component {
                                 <p className='text'>{text}</p>
                                 <p className='more'
                                     style={pageNotFound === true || screenWidth < 765 ? { display: 'none' } : { display: 'block' }}
-                                    onClick={this.showInfoSrceen}>подробнее</p>
+                                    onClick={this.showInfoSrceen}></p>
                             </div>
                         </div>
 
@@ -422,10 +428,10 @@ class App extends Component {
                     openSecondMenu={this.openSecondMenu}
                 />
                 <PageNotFound
-                lottieClick={this.closeMenu}
-                pageNotFound={pageNotFound}
-                screenHeight={screenHeight}
-                screenWidth={screenWidth}
+                    lottieClick={this.closeMenu}
+                    pageNotFound={pageNotFound}
+                    screenHeight={screenHeight}
+                    screenWidth={screenWidth}
                 />
             </>
         );

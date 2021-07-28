@@ -1,6 +1,6 @@
 import Lottie from 'react-lottie';
 import animationData from '../animation/pageNotFound.json'
-import './styles/PageNotFound.scss';
+import './styles/PageNotFound.css';
 
 const defaultOptions = {
     loop: true,

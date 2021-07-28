@@ -10,6 +10,7 @@ $white-color: #EBE4D6;
     font-family: 'Rubik', sans-serif;
 }
 .info-screen{
+    z-index: 3;
     display: flex;
     flex-direction: column;
     justify-content: center;
